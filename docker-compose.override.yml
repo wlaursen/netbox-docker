@@ -1,35 +1,44 @@
 version: '3.4'
 services:
   netbox:
+    image: netbox:latest-plugins
+    pull_policy: never
     ports:
-    - 8080:8080
+      - 8080:8080
+    build:
+      context: .
+      dockerfile: Dockerfile-Plugins
     volumes:
-    - /volume2/docker/netbox/netbox/config:/etc/netbox/config:z,rw
-    - /volume2/docker/netbox/netbox/media:/opt/netbox/netbox/media:z,rw
-    - /volume2/docker/netbox/netbox/reports:/opt/netbox/netbox/reports:z,rw
-    - /volume2/docker/netbox/netbox/scripts:/opt/netbox/netbox/scripts:z,rw
+      - /volume2/docker/netbox/netbox/config:/etc/netbox/config:z,rw
+      - /volume2/docker/netbox/netbox/media:/opt/netbox/netbox/media:z,rw
+      - /volume2/docker/netbox/netbox/reports:/opt/netbox/netbox/reports:z,rw
+      - /volume2/docker/netbox/netbox/scripts:/opt/netbox/netbox/scripts:z,rw
     healthcheck:
       retries: 15
     environment:
-    - SKIP_SUPERUSER=false
+      - SKIP_SUPERUSER=false
   netbox-worker:
+    image: netbox:latest-plugins
+    pull_policy: never
     volumes:
-    - /volume2/docker/netbox/netbox/config:/etc/netbox/config:z,rw
-    - /volume2/docker/netbox/netbox/media:/opt/netbox/netbox/media:z,rw
-    - /volume2/docker/netbox/netbox/reports:/opt/netbox/netbox/reports:z,rw
-    - /volume2/docker/netbox/netbox/scripts:/opt/netbox/netbox/scripts:z,rw
+      - /volume2/docker/netbox/netbox/config:/etc/netbox/config:z,rw
+      - /volume2/docker/netbox/netbox/media:/opt/netbox/netbox/media:z,rw
+      - /volume2/docker/netbox/netbox/reports:/opt/netbox/netbox/reports:z,rw
+      - /volume2/docker/netbox/netbox/scripts:/opt/netbox/netbox/scripts:z,rw
   netbox-housekeeping:
+    image: netbox:latest-plugins
+    pull_policy: never
     volumes:
-    - /volume2/docker/netbox/netbox/config:/etc/netbox/config:z,rw
-    - /volume2/docker/netbox/netbox/media:/opt/netbox/netbox/media:z,rw
-    - /volume2/docker/netbox/netbox/reports:/opt/netbox/netbox/reports:z,rw
-    - /volume2/docker/netbox/netbox/scripts:/opt/netbox/netbox/scripts:z,rw
+      - /volume2/docker/netbox/netbox/config:/etc/netbox/config:z,rw
+      - /volume2/docker/netbox/netbox/media:/opt/netbox/netbox/media:z,rw
+      - /volume2/docker/netbox/netbox/reports:/opt/netbox/netbox/reports:z,rw
+      - /volume2/docker/netbox/netbox/scripts:/opt/netbox/netbox/scripts:z,rw
   postgres:
     volumes:
-    - /volume2/docker/netbox/database:/var/lib/postgresql/data:z,rw
+      - /volume2/docker/netbox/database:/var/lib/postgresql/data:z,rw
   redis:
     volumes:
-    - /volume2/docker/netbox/redis-data:/data:z,rw
+      - /volume2/docker/netbox/redis-data:/data:z,rw
   redis-cache:
     volumes:
-    - /volume2/docker/netbox/redis-cache:/data:z,rw
+      - /volume2/docker/netbox/redis-cache:/data:z,rw
