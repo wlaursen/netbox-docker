@@ -1,2 +1,2 @@
 netbox-topology-views
-netbox_floorplan
+netbox-floorplan-plugin
