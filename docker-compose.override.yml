@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   netbox:
-    image: netbox:latest-plugins
+    image: netbox:27bf52c
     pull_policy: never
     ports:
       - 8080:8080
